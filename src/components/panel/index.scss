@@ -13,8 +13,4 @@
   grid-template-columns: repeat(3, 1fr);
   border: 2px solid #FFf;
   border-radius: 5px;
-  &__square {
-    grid-column: 1 / 3;
-    grid-row: 1;
-  }
 }

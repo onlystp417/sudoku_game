@@ -1,5 +1,6 @@
 .block {
   display: grid;
+  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
   border-right: 2px solid #FFF;
   border-bottom: 2px solid #FFF;
