@@ -1,13 +1,4 @@
 .blocks {
-  max-width: 500px;
-  max-height: 500px;
-  width: 80%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   aspect-ratio: 1 / 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

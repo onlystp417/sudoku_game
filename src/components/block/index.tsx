@@ -1,8 +1,9 @@
 import React from 'react'
 import './index.scss'
 
+
 interface props {
-  numbers: number[]; // 傳入的數字陣列
+  numbers: number[];
 }
 
 export default function Block({ numbers }: props) {

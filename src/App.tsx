@@ -1,10 +1,14 @@
 import './App.scss'
 import Panel from './components/panel'
+import JoyStick from './components/joystick'
 
 function App() {
 
   return (
-    <Panel/>
+    <div className="sudoku">
+      <Panel/>
+      <JoyStick />
+    </div>
   )
 }
 
