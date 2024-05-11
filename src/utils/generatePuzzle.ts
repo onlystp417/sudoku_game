@@ -97,8 +97,9 @@ function findEmptyCell(board: SudokuBoard): [number, number] | null {
 }
 
 // 根据已有解答随机挖空生成题目
-export function generatePuzzle(board: SudokuBoard, difficultyLevel: number): SudokuBoard {
-    const puzzleBoard = board.map(row => [...row]); // 复制一份解答作为题目
+export function generatePuzzle(difficultyLevel: number): [SudokuBoard, SudokuBoard] {
+    const puzzleAnswer: SudokuBoard = generateSudoku();
+    const puzzleBoard = puzzleAnswer.map(row => [...row]); // 复制一份解答作为题目
     
     // 根据难度级别挖空
     let cellsToBeRemoved = 0;
@@ -127,7 +128,7 @@ export function generatePuzzle(board: SudokuBoard, difficultyLevel: number): Sud
         }
     }
     
-    return puzzleBoard;
+    return [ puzzleBoard, puzzleAnswer ];
 }
 
 // 示例用法
