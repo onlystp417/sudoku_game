@@ -8,7 +8,7 @@ export interface numNodeIntr {
   setIsActive(): void
 }
 
-export class numNode {
+class numNode {
   private value: number
   private isActive: boolean
   private isNative: boolean
