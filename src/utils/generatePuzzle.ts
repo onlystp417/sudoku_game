@@ -1,4 +1,4 @@
-// 定义 9x9 的二维数组作为 Sudoku 棋盘
+// decalre sudoku data structure
 type SudokuBoard = number[][];
 const sudokuRamNum: number[] = [];
 
@@ -24,23 +24,23 @@ function generateRamNum(index: number = 0): void {
     }
 }
 
-// 检查在指定位置 (row, col) 填入数字 value 是否符合 Sudoku 规则
+// check specific (rowm col) is valid
 function isValid(board: SudokuBoard, row: number, col: number, value: number): boolean {
-    // 检查同一行是否已经有相同数字
+    // check if is duplcated in the same row
     for (let i = 0; i < 9; i++) {
         if (board[row][i] === value) {
             return false;
         }
     }
     
-    // 检查同一列是否已经有相同数字
+    // check if is duplcated in the same col
     for (let i = 0; i < 9; i++) {
         if (board[i][col] === value) {
             return false;
         }
     }
     
-    // 检查 3x3 的子区域是否已经有相同数字
+    // check if is duplcated in the same 3*3 block
     const startRow = Math.floor(row / 3) * 3;
     const startCol = Math.floor(col / 3) * 3;
     for (let i = startRow; i < startRow + 3; i++) {
@@ -54,7 +54,7 @@ function isValid(board: SudokuBoard, row: number, col: number, value: number): b
     return true;
 }
 
-// 生成一个随机的 Sudoku 解答
+// generate random sudoku puzzle
 export function generateSudoku(): SudokuBoard {
     generateRamNum();
     const board: SudokuBoard = new Array(9).fill(null).map(() => new Array(9).fill(0));
@@ -62,11 +62,11 @@ export function generateSudoku(): SudokuBoard {
     return board;
 }
 
-// 填充 Sudoku 棋盘的主逻辑
+// fill sudoku cells
 function fillSudoku(board: SudokuBoard): boolean {
     const emptyCell = findEmptyCell(board);
     if (!emptyCell) {
-        return true; // 棋盘已经填满
+        return true; // cells is completely filled
     }
     
     const [row, col] = emptyCell;
@@ -77,14 +77,14 @@ function fillSudoku(board: SudokuBoard): boolean {
             if (fillSudoku(board)) {
                 return true;
             }
-            board[row][col] = 0; // 回溯
+            board[row][col] = 0; // go back to prev (row, col), cuz there no valid number to fill in the cell
         }
     }
     
-    return false; // 无法填入有效数字
+    return false; // no number valid
 }
 
-// 找到 Sudoku 棋盘中的空单元格
+// find empty cell
 function findEmptyCell(board: SudokuBoard): [number, number] | null {
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
@@ -93,15 +93,15 @@ function findEmptyCell(board: SudokuBoard): [number, number] | null {
             }
         }
     }
-    return null; // 棋盘已填满
+    return null; // cells is completely filled
 }
 
-// 根据已有解答随机挖空生成题目
+// hollow out cells randomly
 export function generatePuzzle(difficultyLevel: number): [SudokuBoard, SudokuBoard] {
     const puzzleAnswer: SudokuBoard = generateSudoku();
-    const puzzleBoard = puzzleAnswer.map(row => [...row]); // 复制一份解答作为题目
+    const puzzleBoard = puzzleAnswer.map(row => [...row]); // copy the whole cells value as answer
     
-    // 根据难度级别挖空
+    // hollow out depends on the level
     let cellsToBeRemoved = 0;
     switch (difficultyLevel) {
         case 1:
@@ -118,7 +118,6 @@ export function generatePuzzle(difficultyLevel: number): [SudokuBoard, SudokuBoa
             break;
     }
     
-    // 随机挖空指定数量的单元格
     while (cellsToBeRemoved > 0) {
         const row = Math.floor(Math.random() * 9);
         const col = Math.floor(Math.random() * 9);
@@ -130,8 +129,3 @@ export function generatePuzzle(difficultyLevel: number): [SudokuBoard, SudokuBoa
     
     return [ puzzleBoard, puzzleAnswer ];
 }
-
-// 示例用法
-// generateRamNum(0);
-// const sudokuSolution = generateSudoku();
-// const sudokuPuzzle = generatePuzzle(sudokuSolution, 2); // 中等难度题目

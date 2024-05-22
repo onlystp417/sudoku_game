@@ -8,7 +8,12 @@ interface props {
 
 export default function Block({ numbers }: props) {
   const numNodes = numbers.map((number, index) => (
-    <span className="block__cell" key={index}>{number.getValue() || ''}</span>
+    <span
+      className="block__cell" key={index}
+      // onClick={}
+      >
+        {number.getValue() || ''}
+    </span>
   ));
 
   return (
